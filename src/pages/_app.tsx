@@ -20,26 +20,20 @@ import "@fontsource/red-hat-display/900.css";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
-}
-
+// @ts-ignore
 export default function MyApp(props) {
   const {
     Component,
     emotionCache = clientSideEmotionCache,
     pageProps,
     router,
-  } = props;
+  } = props as AppProps;
 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
         <title>Home</title>
-        <meta
-          name="description"
-          content="Employee information and documentation for SpringMicroHost."
-        />
+        <meta name="description" content="This is a p." />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
