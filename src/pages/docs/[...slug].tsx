@@ -1,7 +1,7 @@
 import Image from "next/image";
 import matter from "gray-matter";
 import glob from "glob";
-import { InferGetStaticPropsType } from "next";
+import { InferGetStaticPropsType, GetStaticProps } from "next";
 import Head from "next/head";
 import Container from "@mui/material/Container";
 import Markdown from "@/components/markdown";
@@ -9,12 +9,7 @@ import { MainLayout } from "@/components/layout/main";
 import { Typography } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "next/link";
-
-function reformatDate(fullDate) {
-  const date = new Date(fullDate);
-
-  return date.toDateString().slice(4);
-}
+import { reformatDate } from "@/utils/string";
 
 export default function BlogTemplate({
       frontmatter,
@@ -26,7 +21,7 @@ export default function BlogTemplate({
   return (
     <>
       <Head>
-        <title>{siteTitle} | SpringMicro Docs</title>
+        <title>{siteTitle} | Docs</title>
       </Head>
       <MainLayout wide={true}>
         <div>
@@ -57,7 +52,8 @@ export default function BlogTemplate({
   );
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
+  // @ts-ignore
   const { slug } = context.params;
   // retrieving the Markdown file associated to the slug
   // and reading its data
@@ -73,7 +69,7 @@ export async function getStaticProps(context) {
       markdownBody: data.content,
     },
   };
-}
+};
 
 export async function getStaticPaths() {
   // getting all .md files from the docs directory

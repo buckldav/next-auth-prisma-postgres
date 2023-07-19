@@ -1,7 +1,9 @@
 import { NextApiHandler } from "next";
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import EmailProvider from "next-auth/providers/email";
+import EmailProvider, {
+  SendVerificationRequestParams,
+} from "next-auth/providers/email";
 import prisma from "%/prisma";
 import type { Theme } from "next-auth/core/types";
 import type { NextAuthOptions } from "next-auth";
@@ -65,10 +67,10 @@ function text({ url, host }: { url: string; host: string }) {
   return `Sign in to ${host}\n${url}\n\n`;
 }
 
-async function sendVerificationRequest(params) {
+async function sendVerificationRequest(params: SendVerificationRequestParams) {
   const { identifier: email, url, provider, theme } = params;
-  const emailDomain = email.split("@").pop();
-  const ALLOWED_DOMAINS = [];
+  const emailDomain = email.split("@").pop() ?? "";
+  const ALLOWED_DOMAINS: string[] = [];
   if (
     process.env.NODE_ENV === "production" &&
     ALLOWED_DOMAINS.length > 0 &&

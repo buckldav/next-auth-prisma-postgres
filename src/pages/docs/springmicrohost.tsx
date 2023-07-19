@@ -3,21 +3,23 @@ import { MainLayout } from "@/components/layout/main";
 import { Typography, List, ListItem, ListItemText } from "@mui/material";
 import glob from "glob";
 import matter from "gray-matter";
-import { InferGetStaticPropsType } from "next";
+import { InferGetStaticPropsType, GetStaticProps } from "next";
 import Link from "next/link";
+
+type PagesType = Array<{ title: string; summary: string; href: string }>;
 
 function Page({ pages }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
-        <title>SpringMicro Docs</title>
+        <title>Docs</title>
       </Head>
       <MainLayout>
         <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
           Docs
         </Typography>
         <List>
-          {pages.map((page) => (
+          {(pages as PagesType).map((page) => (
             <ListItem key={page.href}>
               <Link href={page.href}>
                 <ListItemText primary={page.title} secondary={page.summary} />
@@ -30,7 +32,7 @@ function Page({ pages }: InferGetStaticPropsType<typeof getStaticProps>) {
   );
 }
 
-export async function getStaticProps(context) {
+export const getStaticProps: GetStaticProps = async (context) => {
   // getting all .md files from the docs directory
   const blogs = glob.sync(`src/docs/springmicrohost/**/*.md`);
   // converting the file names to their slugs
@@ -47,7 +49,7 @@ export async function getStaticProps(context) {
   });
 
   const props = {
-    pages: [] as Array<{ title: string; summary: string; href: string }>,
+    pages: [] as PagesType,
   };
 
   blogSlugs.forEach(async (slug) => {
@@ -65,6 +67,6 @@ export async function getStaticProps(context) {
   return {
     props,
   };
-}
+};
 
 export default Page;

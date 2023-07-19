@@ -1,4 +1,15 @@
-# SpringMicro Employee Manager
+# Next.js + NextAuth + Prisma + PostgreSQL
+
+## Features
+
+- [MaterialUI](https://mui.com/material-ui/) with a custom theme at `src/theme.ts`
+- Email authentication with [NextAuth](https://next-auth.js.org/)
+- [Storybook](https://storybook.js.org/) for component development
+- [Prisma](https://www.prisma.io/) for database schema and migrations
+- [PostgreSQL](https://www.postgresql.org/) database (docker compose included)
+- Markdown docs rendering with [`react-markdown`](https://www.npmjs.com/package/react-markdown) and [`gray-matter`](https://www.npmjs.com/package/gray-matter)
+- Testing with [`vitest`](https://vitest.dev/)
+- Import aliases (see `tsconfig.json`)
 
 ## Getting Started
 
@@ -43,7 +54,7 @@ docker compose up -d
 
 Run it locally: [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
 
-## Scripts For Dev
+### Scripts For Dev
 
 ```bash
 npm install
@@ -64,4 +75,35 @@ npx prisma generate
 npx prisma studio
 # migration
 npx prisma migrate dev
+```
+
+## Storybook
+
+```bash
+npm run storybook
+```
+
+Create stories in the same directory as the components. (e.g. `user-detail.tsx` and `user-detail.stories.tsx` are in the same directory).
+
+### Examples
+
+See examples of stories and documentation in `src/stories`. You can delete these after viewing them.
+
+### Create Component + Story Boilerplate
+
+Script to create a component and story and open in VSCode. Creates any needed directories.
+
+```sh
+cd ~ # root of the project
+sh scripts/newComponent.sh <file_path> <component_name> <story_name>
+# example usage
+sh scripts/newComponent.sh src/components/group/my-component MyComponent "Group/My Component"
+```
+
+## Unit Tests
+
+Mocks are written in `lib/__mocks__`, tests are written in `test/index.test.ts`
+
+```bash
+npm run test
 ```

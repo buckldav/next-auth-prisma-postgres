@@ -1,4 +1,4 @@
-import { InferGetServerSidePropsType } from "next";
+import { InferGetServerSidePropsType, NextPageContext } from "next";
 import { getServerSession } from "next-auth";
 import { UserDetail } from "@/components/user/user-detail";
 import { getUserByEmail } from "@/utils/getUser";
@@ -10,8 +10,10 @@ function Page(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return <UserDetail {...props} />;
 }
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps = async (ctx: NextPageContext) => {
+  // @ts-ignore
   const session = await getServerSession(ctx.req, ctx.res, options);
+  // @ts-ignore
   const user = await getUserByEmail(session.user.email);
   return { props: { loggedInRole: user.userRole, user } };
 };

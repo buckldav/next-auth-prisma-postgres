@@ -15,11 +15,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(405);
     }
   } catch (e) {
-    console.log(e.message);
-    const status = parseInt(e.message);
+    console.log((e as unknown as any).message);
+    const status = parseInt((e as unknown as any).message);
     if (isNaN(status)) {
       res.status(500);
-      res.statusMessage = e.message;
+      res.statusMessage = (e as unknown as any).message;
     } else {
       res.status(status);
     }

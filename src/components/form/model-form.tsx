@@ -161,11 +161,13 @@ export function useFormData<O>({
   userId,
 }: ModelFormProps<O>): [[string, any][] | (keyof O)[][], FormikProps<O>] {
   const getBaseModelEntries = () =>
-    Object.entries(obj).filter(([key, val]) =>
-      keys.includes(key as keyof O) ? [key, val] : false
-    );
+    !obj
+      ? []
+      : Object.entries(obj).filter(([key, val]) =>
+          keys.includes(key as keyof O) ? [key, val] : false
+        );
   const baseModelEmptyEntries = keys.map((key) => [key, undefined]);
-  const entries = obj ? getBaseModelEntries() : baseModelEmptyEntries;
+  const entries = (obj ? getBaseModelEntries() : baseModelEmptyEntries) ?? [];
   const initialValues = Object.fromEntries(entries);
   const router = useRouter();
 
@@ -188,6 +190,7 @@ export function useFormData<O>({
     },
   });
 
+  // @ts-ignore
   return [entries, formik];
 }
 
@@ -216,11 +219,14 @@ export default function ModelForm<O>(props: ModelFormProps<O>) {
     <BaseModelForm {...props} formik={formik}>
       {entries.map(([key, val]) => (
         <InputField
+          // @ts-ignore
           key={key}
           objKey={key}
+          // @ts-ignore
           val={formik.values[key]}
           onChange={formik.handleChange}
           userRole={props.userRole}
+          // @ts-ignore
           required={props.requiredKeys.includes(key)}
         />
       ))}

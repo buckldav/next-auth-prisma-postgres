@@ -23,15 +23,15 @@ function getInputType(key: string, val: any) {
   }
 }
 
-const BOOL_FIELDS = ["isActive"];
+const BOOL_FIELDS: string[] = ["isActive"];
 
-const TEXTAREA_FIELDS = [];
+const TEXTAREA_FIELDS: string[] = [];
 
-const OWNER_FIELDS = [];
+const OWNER_FIELDS: string[] = [];
 
-const USER_FIELDS = [];
+const USER_FIELDS: string[] = [];
 
-const DISABLED_FIELDS = [];
+const DISABLED_FIELDS: string[] = [];
 
 type UserList = { isActive: boolean; id: number; name?: string; email: string };
 
@@ -80,7 +80,7 @@ export function InputField({
   if (Object.keys(ENUMS).includes(objKey)) {
     return (
       <TextField {...selectProps} required={required}>
-        {ENUMS[objKey].map((val) => (
+        {ENUMS[objKey as keyof typeof ENUMS].map((val) => (
           <MenuItem key={val} value={val}>
             {val}
           </MenuItem>

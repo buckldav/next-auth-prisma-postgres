@@ -2,8 +2,8 @@ import { useSession, signOut } from "next-auth/react";
 import { Button, Grid, Typography, Box, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 import React, { PropsWithChildren } from "react";
-import { OwnerGuard } from "../../guards";
-import { useRouter } from "next/router";
+import { AdminGuard } from "../../guards";
+import { NextRouter, useRouter } from "next/router";
 import VillaIcon from "@mui/icons-material/Villa";
 import GroupIcon from "@mui/icons-material/Group";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -16,7 +16,15 @@ const leftLinks = [
 
 const ownerLinks = [{ href: "/users", text: "Users", icon: <GroupIcon /> }];
 
-const ResponsiveLink = ({ href, text, icon }) => (
+const ResponsiveLink = ({
+  href,
+  text,
+  icon,
+}: {
+  href: string;
+  text: string;
+  icon: React.ReactNode;
+}) => (
   <Link href={href}>
     <Box
       sx={{ flexDirection: "column", alignItems: "center" }}
@@ -34,7 +42,13 @@ const ResponsiveLink = ({ href, text, icon }) => (
   </Link>
 );
 
-const ProfileLink = ({ username, router }) => {
+const ProfileLink = ({
+  username,
+  router,
+}: {
+  username: string;
+  router: NextRouter;
+}) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -152,18 +166,21 @@ export function Navbar() {
         alignItems="center"
         container
       >
-        <OwnerGuard throw403={false}>
+        <AdminGuard throw403={false}>
           {ownerLinks.map((link) => (
             <ResponsiveLink key={link.href} {...link} />
           ))}
-        </OwnerGuard>
-        <ProfileLink username={session.user.email} router={router} />
+        </AdminGuard>
+        <ProfileLink username={session?.user?.email ?? ""} router={router} />
       </Grid>
     </Grid>
   );
 }
 
-export function MainLayout({ children, wide = false }) {
+export function MainLayout({
+  children,
+  wide = false,
+}: React.PropsWithChildren<{ wide?: boolean }>) {
   return (
     <Box
       sx={{

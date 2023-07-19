@@ -21,7 +21,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const users = await prisma.user.findMany({
           where: {
             isActive: true,
-            userRole: userRole ? UserRole[userRole as string] : undefined,
+            userRole: userRole
+              ? UserRole[userRole as keyof typeof UserRole]
+              : undefined,
           },
         });
         res.status(200).json(
@@ -41,7 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } catch (e) {
     console.error(e);
-    const status = parseInt(e.message);
+    const status = parseInt((e as unknown as any).message);
     if (isNaN(status)) {
       res.status(500);
     } else {

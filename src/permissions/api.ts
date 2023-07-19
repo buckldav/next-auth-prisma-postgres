@@ -7,6 +7,7 @@ import { UserRole } from "@prisma/client";
 export async function isLoggedIn(req: NextApiRequest, res: NextApiResponse) {
   const session = await getServerSession(req, res, options);
   if (session) {
+    // @ts-ignore
     const user = await getUserByEmail(session.user.email);
     return user;
   } else {

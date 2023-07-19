@@ -17,3 +17,9 @@ export function formatMoney(money: Decimal) {
 export function formatDateString(date: string) {
   return new Date(Date.parse(date)).toDateString();
 }
+
+export function reformatDate(fullDate: string | number | Date) {
+  const date = new Date(fullDate);
+
+  return date.toDateString().slice(4);
+}

@@ -1,11 +1,8 @@
 import { Box, Button, Typography, Alert, AlertTitle } from "@mui/material";
-import Head from "next/head";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import Linkify from "react-linkify";
 
-function Home(props) {
+// @ts-ignore
+export default function Page(props) {
   return (
     <div>
       <main>
@@ -33,5 +30,3 @@ function Home(props) {
     </div>
   );
 }
-
-export default Home;

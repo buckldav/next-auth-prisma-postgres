@@ -36,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(405);
     }
   } catch (e) {
-    const status = parseInt(e.message);
+    const status = parseInt((e as unknown as any).message);
     if (isNaN(status)) {
       res.status(500);
     } else {

@@ -6,7 +6,7 @@ import { NextPageContext, InferGetServerSidePropsType } from "next";
 import prisma from "%/prisma";
 import { calcWidthOfField } from "@/utils/string";
 import Link from "next/link";
-import { OwnerGuard } from "@/guards";
+import { AdminGuard } from "@/guards";
 
 export default function Page(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -19,7 +19,7 @@ export default function Page(
 
   const gridColumns = columns.map((col) => ({
     ...col,
-    renderCell: (params) =>
+    renderCell: (params: GridValueGetterParams) =>
       col.field === "id" ? (
         <Link href={`/users/${params.value}`}>{params.value}</Link>
       ) : (
@@ -28,7 +28,7 @@ export default function Page(
   }));
 
   return (
-    <OwnerGuard>
+    <AdminGuard>
       <MainLayout wide={true}>
         <Typography component="h1" variant="h4" sx={{ marginBottom: 2 }}>
           Users
@@ -55,12 +55,13 @@ export default function Page(
               },
             }}
             rows={rows}
+            // @ts-ignore
             columns={gridColumns}
             pageSizeOptions={[5]}
           />
         </Box>
       </MainLayout>
-    </OwnerGuard>
+    </AdminGuard>
   );
 }
 

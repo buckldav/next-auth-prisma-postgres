@@ -24,23 +24,3 @@ export function getUserIdForRequest(user: User, req: NextApiRequest) {
     return user.id;
   }
 }
-
-export async function getAddressesByUserId(id: number) {
-  return await prisma.addressUSA.findMany({ where: { userId: id } });
-}
-
-export async function getPhonesByUserId(id: number) {
-  return await prisma.phoneUSA.findMany({ where: { userId: id } });
-}
-
-export async function getTaxInfoByUserId(id: number) {
-  return await prisma.taxInfo.findUnique({ where: { userId: id } });
-}
-
-export async function getAllPIIByUserId(id: number) {
-  return {
-    addresses: await getAddressesByUserId(id),
-    phones: await getPhonesByUserId(id),
-    taxInfo: await getTaxInfoByUserId(id),
-  };
-}

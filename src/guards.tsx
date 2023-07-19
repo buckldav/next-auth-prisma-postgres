@@ -3,9 +3,12 @@ import { Box } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { UserRole } from "@prisma/client";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 
-export function AuthGuard({ router, children }) {
+export function AuthGuard({
+  router,
+  children,
+}: React.PropsWithChildren<{ router: NextRouter }>) {
   const { status } = useSession();
   if (status === "loading") {
     return null;
@@ -27,7 +30,10 @@ export function AuthGuard({ router, children }) {
   return children;
 }
 
-export function OwnerGuard({ children, throw403 = true }) {
+export function AdminGuard({
+  children,
+  throw403 = true,
+}: React.PropsWithChildren<{ throw403?: boolean }>) {
   const { status } = useSession();
   const [loading, setLoading] = useState(true);
   const [forbidden, setForbidden] = useState(true);
