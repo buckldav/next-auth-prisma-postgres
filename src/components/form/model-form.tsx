@@ -1,10 +1,15 @@
-import { Box, Alert, Typography, Modal, AlertTitle } from "@mui/material";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import { UserRole, PaymentMethod, Payment } from "@prisma/client";
+import {
+  Button,
+  TextField,
+  Box,
+  Alert,
+  Typography,
+  Modal,
+  AlertTitle,
+} from "@mui/material";
+import { UserRole } from "@prisma/client";
 import { FormikProps, useFormik } from "formik";
-import { InputField } from "./inputField";
+import { InputField } from "./input-field";
 import { useState, PropsWithChildren } from "react";
 import { useRouter } from "next/router";
 

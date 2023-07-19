@@ -2,13 +2,17 @@ import { useSession, signOut } from "next-auth/react";
 import { Button, Grid, Typography, Box, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
 import React, { PropsWithChildren } from "react";
-import { OwnerGuard } from "./guards";
+import { OwnerGuard } from "../../guards";
 import { useRouter } from "next/router";
 import VillaIcon from "@mui/icons-material/Villa";
 import GroupIcon from "@mui/icons-material/Group";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArticleIcon from "@mui/icons-material/Article";
 
-const leftLinks = [{ href: "/", text: "Home", icon: <VillaIcon /> }];
+const leftLinks = [
+  { href: "/", text: "Home", icon: <VillaIcon /> },
+  { href: "/docs", text: "Docs", icon: <ArticleIcon /> },
+];
 
 const ownerLinks = [{ href: "/users", text: "Users", icon: <GroupIcon /> }];
 
@@ -159,7 +163,7 @@ export function Navbar() {
   );
 }
 
-export function Layout({ children, wide = false }) {
+export function MainLayout({ children, wide = false }) {
   return (
     <Box
       sx={{

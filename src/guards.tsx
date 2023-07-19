@@ -32,7 +32,7 @@ export function OwnerGuard({ children, throw403 = true }) {
   const [loading, setLoading] = useState(true);
   const [forbidden, setForbidden] = useState(true);
   useEffect(() => {
-    fetch("/api/users/getCurrentUserRole")
+    fetch("/api/users/get-current-user-role")
       .then((res) => {
         res.json().then((user) => {
           setForbidden(user.userRole !== UserRole.ADMIN);

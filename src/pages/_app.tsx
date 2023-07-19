@@ -7,7 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { theme } from "@/theme";
 import createEmotionCache from "@/createEmotionCache";
-import { Navbar } from "@/layout";
+import { Navbar } from "@/components/layout/main";
 import { AuthGuard } from "@/guards";
 import "@fontsource/red-hat-display/300.css";
 import "@fontsource/red-hat-display/400.css";

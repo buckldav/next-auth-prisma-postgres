@@ -7,7 +7,9 @@
     "build": "npx prisma migrate deploy && npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -36,14 +38,24 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
+    "@storybook/addon-essentials": "^7.1.0",
+    "@storybook/addon-interactions": "^7.1.0",
+    "@storybook/addon-links": "^7.1.0",
+    "@storybook/addon-onboarding": "^1.0.7",
+    "@storybook/blocks": "^7.1.0",
+    "@storybook/nextjs": "^7.1.0",
+    "@storybook/react": "^7.1.0",
+    "@storybook/testing-library": "^0.2.0",
     "@types/node": "^20.3.1",
     "@types/nodemailer": "^6.4.8",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "eslint": "^8.43.0",
     "eslint-config-next": "^13.4.7",
+    "eslint-plugin-storybook": "^0.6.12",
     "node-mocks-http": "^1.12.2",
     "prisma": "^4.16.1",
+    "storybook": "^7.1.0",
     "vitest": "^0.32.2",
     "vitest-mock-extended": "^1.1.3"
   }

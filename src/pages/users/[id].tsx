@@ -1,7 +1,7 @@
 import { InferGetServerSidePropsType } from "next";
 import { getServerSession } from "next-auth";
 import { getUserByEmail, getUserById } from "@/utils/getUser";
-import UserDetail from "@/components/userDetail";
+import { UserDetail } from "@/components/user/user-detail";
 import { options } from "@/pages/api/auth/[...nextauth]";
 import { OwnerGuard } from "@/guards";
 

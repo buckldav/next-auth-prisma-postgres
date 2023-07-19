@@ -1,7 +1,7 @@
 import { User, UserRole } from "@prisma/client";
-import { Layout } from "../layout";
+import { MainLayout } from "../layout/main";
 import { Box, Skeleton, Typography } from "@mui/material";
-import ModelForm, { FormModalWrapper } from "./modelForm";
+import ModelForm, { FormModalWrapper } from "../form/model-form";
 import { useSession } from "next-auth/react";
 
 function DataTable({ obj }: { obj: any }) {
@@ -23,20 +23,19 @@ function DataTable({ obj }: { obj: any }) {
   );
 }
 
-export default function UserDetail({
-  loggedInRole,
-  user,
-}: {
+export type UserDetailProps = {
   loggedInRole: UserRole;
   user: User;
-}) {
+};
+
+export function UserDetail({ loggedInRole, user }: UserDetailProps) {
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <Skeleton />;
   }
 
   return (
-    <Layout>
+    <MainLayout>
       <Typography component="h1" variant="h4" sx={{ mb: 2 }}>
         User
       </Typography>
@@ -62,6 +61,6 @@ export default function UserDetail({
           method="PUT"
         />
       </FormModalWrapper>
-    </Layout>
+    </MainLayout>
   );
 }

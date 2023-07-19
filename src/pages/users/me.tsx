@@ -1,6 +1,6 @@
 import { InferGetServerSidePropsType } from "next";
 import { getServerSession } from "next-auth";
-import UserDetail from "@/components/userDetail";
+import { UserDetail } from "@/components/user/user-detail";
 import { getUserByEmail } from "@/utils/getUser";
 import { options } from "@/pages/api/auth/[...nextauth]";
 import prisma from "%/prisma";

@@ -1,5 +1,5 @@
 import { Typography, Box, Button } from "@mui/material";
-import { Layout } from "@/layout";
+import { MainLayout } from "@/components/layout/main";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { CSVLink } from "react-csv";
 import { NextPageContext, InferGetServerSidePropsType } from "next";
@@ -29,7 +29,7 @@ export default function Page(
 
   return (
     <OwnerGuard>
-      <Layout wide={true}>
+      <MainLayout wide={true}>
         <Typography component="h1" variant="h4" sx={{ marginBottom: 2 }}>
           Users
         </Typography>
@@ -59,7 +59,7 @@ export default function Page(
             pageSizeOptions={[5]}
           />
         </Box>
-      </Layout>
+      </MainLayout>
     </OwnerGuard>
   );
 }
